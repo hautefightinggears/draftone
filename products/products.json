@@ -1,0 +1,190 @@
+{
+    "categories": [
+        {
+            "id": "boxing",
+            "name": "Boxing",
+            "products": [
+                {
+                    "id": "boxing-gloves",
+                    "name": "Boxing Gloves",
+                    "category": "Boxing",
+                    "image": "../Product/Boxing Gloves/1.webp",
+                    "images": [
+                        "../Product/Boxing Gloves/1.webp",
+                        "../Product/Boxing Gloves/2.webp",
+                        "../Product/Boxing Gloves/3.webp"
+                    ],
+                    "description": "Professional-grade boxing gloves built for training, sparring, and competition. Choose your material and weight for the perfect fit.",
+                    "variants": [
+                        {
+                            "id": "cowhide",
+                            "label": "Cowhide Leather"
+                        },
+                        {
+                            "id": "cowhide-enhanced",
+                            "label": "Cowhide Enhanced Padding"
+                        },
+                        {
+                            "id": "pu",
+                            "label": "PU Synthetic"
+                        },
+                        {
+                            "id": "pu-molded",
+                            "label": "PU Hand Molded"
+                        }
+                    ],
+                    "specs": {
+                        "Weight (oz)": [
+                            "8oz",
+                            "10oz",
+                            "12oz",
+                            "14oz",
+                            "16oz"
+                        ],
+                        "Closure": [
+                            "Velcro",
+                            "Lace-Up"
+                        ],
+                        "Color": [
+                            "Black",
+                            "Red",
+                            "Blue",
+                            "White",
+                            "Custom"
+                        ]
+                    }
+                },
+                {
+                    "id": "boxing-head-guard",
+                    "name": "Boxing Head Guard",
+                    "category": "Boxing",
+                    "image": "../Product/HeadGuard/1.webp",
+                    "images": [
+                        "../Product/HeadGuard/1.webp",
+                        "../Product/HeadGuard/2.webp",
+                        "../Product/HeadGuard/3.webp"
+                    ],
+                    "description": "Protective headgear designed for sparring with maximum safety, visibility, and comfort. Made from cowhide leather with high-density foam padding.",
+                    "variants": [
+                        {
+                            "id": "open-face",
+                            "label": "Open Face"
+                        },
+                        {
+                            "id": "nose-bar",
+                            "label": "Nose Bar"
+                        }
+                    ],
+                    "specs": {
+                        "Size": [
+                            "S",
+                            "M",
+                            "L",
+                            "XL"
+                        ],
+                        "Color": [
+                            "Black",
+                            "Red",
+                            "Blue",
+                            "White",
+                            "Custom"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "mma",
+            "name": "MMA",
+            "products": [
+                {
+                    "id": "mma-grappling-gloves",
+                    "name": "MMA Grappling Gloves",
+                    "category": "MMA",
+                    "image": "../Product/MMA Grappling Glove/1.webp",
+                    "images": [
+                        "../Product/MMA Grappling Glove/1.webp",
+                        "../Product/MMA Grappling Glove/2.webp"
+                    ],
+                    "description": "Open-finger gloves designed for grappling and striking, offering flexibility and protection. Available in PU Sparring or Cowhide Competition grade.",
+                    "variants": [
+                        {
+                            "id": "pu-sparring",
+                            "label": "PU Sparring"
+                        },
+                        {
+                            "id": "cowhide-competition",
+                            "label": "Cowhide Competition"
+                        }
+                    ],
+                    "specs": {
+                        "Size": [
+                            "S",
+                            "M",
+                            "L",
+                            "XL"
+                        ],
+                        "Finger Style": [
+                            "Open Finger",
+                            "Pre-Curved"
+                        ],
+                        "Color": [
+                            "Black",
+                            "Red",
+                            "Blue",
+                            "White",
+                            "Custom"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": "gym-fitness",
+            "name": "Gym & Fitness",
+            "products": [
+                {
+                    "id": "inner-gloves",
+                    "name": "Hand Wraps",
+                    "category": "Gym & Fitness",
+                    "image": "../Product/hand wrap gloves/1.webp",
+                    "images": [
+                        "../Product/hand wrap gloves/1.webp",
+                        "../Product/hand wrap gloves/2.webp"
+                    ],
+                    "description": "Durable hand wraps providing wrist stability and knuckle protection for training and fights. Available in Cotton/Nylon, Gel, or Quick Wrap styles.",
+                    "variants": [
+                        {
+                            "id": "cotton",
+                            "label": "Cotton / Nylon"
+                        },
+                        {
+                            "id": "gel",
+                            "label": "Gel Wrap"
+                        },
+                        {
+                            "id": "quick-wrap",
+                            "label": "Quick Wrap"
+                        }
+                    ],
+                    "specs": {
+                        "Length": [
+                            "1.5m",
+                            "3m",
+                            "4m",
+                            "4.5m"
+                        ],
+                        "Color": [
+                            "Black",
+                            "Red",
+                            "Blue",
+                            "White",
+                            "Pink",
+                            "Custom"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

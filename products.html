@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Haute Fighting Gears</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        /* ── SAMPLES GRID — image sizing ──────────────────────────
+           Mobile: fixed height container so images never collapse.
+           Desktop: natural height, images size to content.        */
+
+        /* Mobile only — fixed height to prevent collapse */
+        @media (max-width: 767px) {
+            #samples-grid .product-img-wrap {
+                width: 100%;
+                height: 180px;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                flex-shrink: 0;
+            }
+
+            #samples-grid .product-img-wrap img {
+                display: block;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: contain;
+                padding: 8px;
+            }
+        }
+
+        /* Desktop — natural sizing, no forced height */
+        @media (min-width: 768px) {
+            #samples-grid .product-img-wrap {
+                width: 100%;
+                background: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                flex-shrink: 0;
+                aspect-ratio: 1 / 1;
+            }
+
+            #samples-grid .product-img-wrap img {
+                display: block;
+                width: 100%;
+                height: auto;
+                object-fit: contain;
+                padding: 8px;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', theme: {
+                extend: {
+                    colors: { 'primary': '#000000', 'on-primary': '#ffffff', 'accent-red': '#E10600', 'surface': '#FBF9F9', 'on-surface': '#1b1b1b', 'surface-container': '#eeeeee', 'surface-container-lowest': '#ffffff', 'surface-container-low': '#f3f3f3', 'outline-variant': '#cfc4c5', 'outline': '#747878', 'neutral-gray': '#707070', 'primary-fixed-dim': '#c6c6c6', 'on-surface-variant': '#444748', 'background': '#f9f9f9' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { 'headline-lg': ['Anton'], 'display-md': ['Anton'], 'headline-md': ['Anton'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'label-bold': ['Hanken Grotesk'], 'label-sm': ['Hanken Grotesk'] },
+                    fontSize: { 'display-md': ['64px', { lineHeight: '60px', letterSpacing: '0.02em' }], 'headline-lg': ['48px', { lineHeight: '44px', letterSpacing: '0.03em' }], 'headline-md': ['32px', { lineHeight: '32px', letterSpacing: '0.03em' }], 'body-lg': ['18px', { lineHeight: '28px', fontWeight: '500' }], 'body-md': ['16px', { lineHeight: '24px' }], 'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.1em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }] }
+                }
+            }
+        }
+    </script>
+    <script src="js/mobile-fixes.js"></script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md">
+    <div id="navbar-placeholder"></div>
+    <main class="pt-[72px]">
+
+        <!-- Hero -->
+        <section class="text-on-primary px-5 md:px-[64px] py-[80px]"
+            style="background: linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)), url('images/sample-thumb.webp') center/cover no-repeat; background-color: #000;">
+            <div class="max-w-[1440px] mx-auto">
+                <h1 class="font-display-md text-display-md uppercase leading-none mb-6">PRODUCTS</h1>
+                <p class="font-body-lg text-body-lg opacity-70 max-w-2xl">
+                    Explore our collection of custom fighting gear, combat sports apparel, and private label projects,
+                    crafted with quality, precision, and attention to detail.
+                </p>
+            </div>
+        </section>
+
+        <!-- Category Filter Bar -->
+        <div id="filter-bar-wrap"
+            style="position:relative;z-index:40;background:#FBF9F9;border-bottom:2px solid #1b1b1b;transition:transform 0.3s cubic-bezier(0.22,1,0.36,1)">
+            <div id="filter-bar" class="max-w-[1440px] mx-auto px-5 md:px-[64px]"
+                style="display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:0">
+                <span class="font-label-bold text-neutral-gray uppercase" style="padding:16px 0">Loading
+                    categories...</span>
+            </div>
+        </div>
+
+        <!-- Product Grid — loaded from JSON -->
+        <section class="px-5 md:px-[64px] py-[60px] max-w-[1440px] mx-auto">
+
+            <div id="samples-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                <div class="col-span-4 text-center py-20">
+                    <span class="material-symbols-outlined text-6xl text-neutral-gray mb-4 block">hourglass_empty</span>
+                    <p class="font-label-bold uppercase opacity-40">Loading products...</p>
+                </div>
+            </div>
+            <div id="samples-empty" class="hidden text-center py-32">
+                <span class="material-symbols-outlined text-7xl text-neutral-gray mb-4 block">inventory_2</span>
+                <p class="font-headline-md text-headline-md uppercase opacity-40">No products in this category yet</p>
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="flex items-center justify-center gap-2 mt-16" style="display:none!important">
+            </div>
+        </section>
+
+        <!-- Bottom CTA -->
+        <section class="bg-primary border-t-4 border-accent-red px-5 md:px-[64px] py-[80px]">
+            <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg text-on-primary uppercase mb-3">READY TO BUILD YOUR
+                        OWN?</h2>
+                    <p class="font-body-lg text-body-lg text-on-primary opacity-60">Every piece is made to your exact
+                        specifications. Share your vision and we will bring it to life.</p>
+                </div>
+                <a href="inquiry.html"
+                    class="shrink-0 inline-flex items-center gap-2 bg-accent-red text-on-primary px-10 py-5 font-label-bold uppercase hover:bg-on-primary hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">send</span> Send Inquiry
+                </a>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer-placeholder"></div>
+    <noscript>
+        <style>
+            body::before {
+                content: "This site requires JavaScript. Please enable it to view products and navigation.";
+                display: block;
+                text-align: center;
+                padding: 40px;
+                font-family: sans-serif;
+                font-size: 16px;
+            }
+        </style>
+    </noscript>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products-engine.js"></script>
+    <script>
+        injectNavbar('samples');
+        injectFooter();
+
+        const PAGE_SIZE = 12;
+        let currentFilter = 'all';
+        let currentPage = 1;
+        let allProducts = [];
+
+        // ── Render one page of the current product list ───────────
+        function renderPage(page) {
+            currentPage = page;
+            const grid = document.getElementById('samples-grid');
+            const empty = document.getElementById('samples-empty');
+            const pager = document.getElementById('pagination');
+
+            const start = (page - 1) * PAGE_SIZE;
+            const slice = allProducts.slice(start, start + PAGE_SIZE);
+
+            if (allProducts.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                pager.style.display = 'none';
+                return;
+            }
+
+            empty.classList.add('hidden');
+
+            const pagePrefix = './pages/';
+
+            grid.innerHTML = slice.map(p => {
+                const img = _resolveImage(p, 0);
+                return `
+                <a href="${pagePrefix}product.html?id=${encodeURIComponent(p.id)}" class="group border border-outline-variant bg-surface-container-lowest overflow-hidden flex flex-col" data-reveal style="text-decoration:none;color:inherit">
+                    <div class="product-img-wrap" style="border-bottom:1px solid #eee">
+                        <img src="${img}" alt="${p.name}"
+                            loading="eager"
+                            class="transition-transform duration-500 group-hover:scale-105"
+                            onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22400%22 height%3D%22400%22%3E%3Crect width%3D%22400%22 height%3D%22400%22 fill%3D%22%23eeeeee%22%2F%3E%3C%2Fsvg%3E'" />
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="font-headline-md text-headline-md uppercase mb-1 leading-tight" style="font-size:17px">${p.name}</h3>
+                        <p class="font-body-md text-neutral-gray mb-4" style="font-size:12px;font-weight:400;letter-spacing:0.04em">${p.categoryName || ''}</p>
+                        <div class="mt-auto">
+                            <span class="w-full bg-accent-red text-on-primary py-3 font-label-bold uppercase flex items-center justify-center gap-2 text-center text-sm" style="pointer-events:none">
+                                <span class="material-symbols-outlined text-[16px]">send</span> Send Inquiry
+                            </span>
+                        </div>
+                    </div>
+                </a>`;
+            }).join('');
+
+            if (page > 1) {
+                document.getElementById('filter-bar-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            const totalPages = Math.ceil(allProducts.length / PAGE_SIZE);
+            if (totalPages <= 1) {
+                pager.style.display = 'none';
+            } else {
+                pager.style.display = 'flex';
+                buildPagination(pager, page, totalPages);
+            }
+
+            if (typeof initScrollReveal === 'function') initScrollReveal();
+        }
+
+        // ── Build pagination controls ─────────────────────────────
+        function buildPagination(container, active, total) {
+            const btnBase = 'display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;padding:0 12px;font-size:13px;font-weight:600;letter-spacing:0.08em;cursor:pointer;border:1.5px solid #e5e5e5;background:#fff;color:#1b1b1b;transition:all 0.18s ease;text-decoration:none;font-family:inherit';
+            const btnActive = 'background:#1b1b1b;color:#fff;border-color:#1b1b1b';
+            let html = '';
+            if (active > 1) html += `<button onclick="renderPage(${active - 1})" style="${btnBase}" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='#fff'">&#8592;</button>`;
+            const pages = [];
+            if (total <= 7) { for (let i = 1; i <= total; i++) pages.push(i); }
+            else {
+                pages.push(1);
+                if (active > 3) pages.push('…');
+                for (let i = Math.max(2, active - 1); i <= Math.min(total - 1, active + 1); i++) pages.push(i);
+                if (active < total - 2) pages.push('…');
+                pages.push(total);
+            }
+            pages.forEach(p => {
+                if (p === '…') { html += `<span style="display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;color:#707070;font-size:13px">…</span>`; }
+                else {
+                    const isActive = p === active;
+                    const style = isActive ? `${btnBase};${btnActive}` : btnBase;
+                    const hover = isActive ? '' : `onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='#fff'"`;
+                    html += `<button onclick="renderPage(${p})" style="${style}" ${hover}>${p}</button>`;
+                }
+            });
+            if (active < total) html += `<button onclick="renderPage(${active + 1})" style="${btnBase}" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='#fff'">&#8594;</button>`;
+            container.innerHTML = html;
+        }
+
+        // ── Load sample products for a given filter ───────────────
+        async function loadFilter(filter) {
+            currentFilter = filter;
+            currentPage = 1;
+            // Always use loadSampleProducts — only the 4 real products
+            const samples = await loadSampleProducts();
+            allProducts = filter === 'all'
+                ? samples
+                : samples.filter(p => p.categoryId === filter);
+            renderPage(1);
+        }
+
+        // ── Build filter bar from real sample products only ───────
+        async function buildSampleFilters(container, activeId, onFilter) {
+            const samples = await loadSampleProducts();
+            const seen = new Set();
+            const cats = [];
+            samples.forEach(p => {
+                if (!seen.has(p.categoryId)) {
+                    seen.add(p.categoryId);
+                    cats.push({ id: p.categoryId, name: p.categoryName });
+                }
+            });
+
+            const allActive = (!activeId || activeId === 'all') ? 'bg-primary text-on-primary' : '';
+            let html = `<button data-filter="all" class="filter-btn ${allActive} px-5 py-2 font-label-bold uppercase border-2 border-primary hover:bg-primary hover:text-on-primary transition-all" style="white-space:nowrap;margin:8px 4px 8px 0">All</button>`;
+            cats.forEach(cat => {
+                const active = cat.id === activeId ? 'bg-primary text-on-primary' : '';
+                html += `<button data-filter="${cat.id}" class="filter-btn ${active} px-5 py-2 font-label-bold uppercase border-2 border-primary hover:bg-primary hover:text-on-primary transition-all" style="white-space:nowrap;margin:8px 4px 8px 0">${cat.name}</button>`;
+            });
+            container.innerHTML = html;
+            container.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-primary', 'text-on-primary'));
+                    btn.classList.add('bg-primary', 'text-on-primary');
+                    if (typeof onFilter === 'function') onFilter(btn.dataset.filter);
+                });
+            });
+        }
+
+        // ── Init ──────────────────────────────────────────────────
+        async function init() {
+            const cat = new URLSearchParams(window.location.search).get('cat') || 'all';
+            currentFilter = cat;
+
+            // Build filter bar using only real sample product categories
+            const filterBar = document.getElementById('filter-bar');
+            await buildSampleFilters(filterBar, cat, async (filterId) => {
+                await loadFilter(filterId);
+            });
+
+            await loadFilter(cat);
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+    <script src="js/animations.js"></script>
+    <!-- COOKIE POPUP — direct child of body, fixed bottom-right -->
+    <section id="hfg-cookie-popup"
+        style="position:fixed;bottom:20px;right:20px;z-index:2147483647;width:480px;max-width:calc(100vw - 40px);background:#fbf9f9;border-top:3px solid #bb0400;box-shadow:0 10px 40px rgba(0,0,0,0.18);padding:28px;font-family:'Hanken Grotesk',sans-serif;">
+        <h2
+            style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;color:#000000;line-height:1;margin:0 0 8px;letter-spacing:0.02em">
+            Cookies &amp; Privacy</h2>
+        <p style="font-size:14px;color:#1b1b1b;margin:0 0 20px;line-height:1.6;opacity:0.85">We use cookies to improve
+            your experience, save your cart, and show relevant products.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button id="hfg-accept" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#ffffff;color:#000000;border:2px solid #000000;padding:11px 28px;flex:1;min-width:130px;transition:background .2s,color .2s"
+                onmouseover="this.style.background='#000000';this.style.color='#ffffff'"
+                onmouseout="this.style.background='#ffffff';this.style.color='#000000'">Accept All</button>
+            <button id="hfg-reject" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#bb0400;color:#ffffff;border:none;padding:11px 28px;flex:1;min-width:130px;transition:background .2s"
+                onmouseover="this.style.background='#8a0300'"
+                onmouseout="this.style.background='#bb0400'">Reject</button>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var p = document.getElementById('hfg-cookie-popup');
+            if (!p) return;
+            localStorage.removeItem('hfg_cookie_consent');
+            if (localStorage.getItem('cookieConsent') === 'accepted' || localStorage.getItem('cookieConsent') === 'rejected') { p.style.display = 'none'; return; }
+            p.style.display = ''; p.style.opacity = '1'; p.style.transform = 'none';
+            function dismiss(v) {
+                localStorage.setItem('cookieConsent', v);
+                p.style.transition = 'opacity .25s, transform .25s';
+                p.style.opacity = '0';
+                p.style.transform = 'translateY(10px)';
+                setTimeout(function () { p.style.display = 'none'; }, 260);
+            }
+            document.getElementById('hfg-accept').onclick = function () { dismiss('accepted'); };
+            document.getElementById('hfg-reject').onclick = function () { dismiss('rejected'); };
+        })();
+    </script>
+</body>
+
+</html>

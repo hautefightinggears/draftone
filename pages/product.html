@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product | Haute Fighting Gears</title>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="shortcut icon" href="../images/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', theme: {
+                extend: {
+                    colors: { 'primary': '#000000', 'on-primary': '#ffffff', 'accent-red': '#E10600', 'surface': '#FBF9F9', 'on-surface': '#1b1b1b', 'surface-container': '#eeeeee', 'surface-container-lowest': '#ffffff', 'surface-container-low': '#f3f3f3', 'outline-variant': '#cfc4c5', 'outline': '#747878', 'neutral-gray': '#707070', 'primary-fixed-dim': '#c6c6c6', 'on-surface-variant': '#444748', 'background': '#f9f9f9' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { 'headline-lg': ['Anton'], 'display-md': ['Anton'], 'headline-md': ['Anton'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'label-bold': ['Hanken Grotesk'], 'label-sm': ['Hanken Grotesk'] },
+                    fontSize: { 'display-md': ['64px', { lineHeight: '60px', letterSpacing: '0.02em' }], 'headline-lg': ['48px', { lineHeight: '44px', letterSpacing: '0.03em' }], 'headline-md': ['32px', { lineHeight: '32px', letterSpacing: '0.03em' }], 'body-lg': ['18px', { lineHeight: '28px', fontWeight: '500' }], 'body-md': ['16px', { lineHeight: '24px' }], 'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.1em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }] }
+                }
+            }
+        }
+    </script>
+    <script src="../js/mobile-fixes.js"></script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md">
+    <div id="navbar-placeholder"></div>
+    <main class="pt-[72px] min-h-screen">
+
+        <!-- Breadcrumb -->
+        <div class="px-5 md:px-[64px] py-4 max-w-[1440px] mx-auto border-b border-outline-variant">
+            <nav class="flex items-center gap-2 font-label-sm text-neutral-gray uppercase flex-wrap">
+                <a href="../" class="hover:text-accent-red transition-colors">Home</a>
+                <span>/</span>
+                <a href="../products.html" class="hover:text-accent-red transition-colors">Products</a>
+                <span>/</span>
+                <span id="breadcrumb-category" class="hover:text-accent-red transition-colors cursor-pointer"></span>
+                <span>/</span>
+                <span id="breadcrumb-name" class="text-on-surface"></span>
+            </nav>
+        </div>
+
+        <!-- Product content -->
+        <section class="px-5 md:px-[64px] py-[60px] max-w-[1440px] mx-auto">
+            <div id="product-content" class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+                <div class="col-span-12 text-center py-32">
+                    <span class="material-symbols-outlined text-7xl text-neutral-gray mb-4 block">hourglass_empty</span>
+                    <p class="font-headline-md text-headline-md uppercase opacity-40">Loading...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related products -->
+        <section class="bg-surface-container px-5 md:px-[64px] py-[80px]">
+            <div class="max-w-[1440px] mx-auto">
+                <h2 class="font-headline-lg text-headline-lg uppercase mb-10" data-reveal>MORE IN THIS CATEGORY</h2>
+                <div id="related-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer-placeholder"></div>
+
+    <noscript>
+        <style>
+            body::before {
+                content: "This site requires JavaScript.";
+                display: block;
+                text-align: center;
+                padding: 40px;
+                font-family: sans-serif;
+            }
+        </style>
+    </noscript>
+
+    <script src="../js/cart.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/products-engine.js"></script>
+    <script src="../js/personalization.js"></script>
+    <script>
+        injectNavbar('samples');
+        injectFooter();
+
+        const FALLBACK_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPwYyVXNVUQWL7f7HrH8fiEfgYPYI_tfyM3CaGpEFhfwhk_x0K5dg-_QQDjiMhuVYoUfD4xI0tuJWivfgSpBkhaYTU5pueNvFmUb7g7u_zRP01qJ4eA_Q6k8oaBeTd5I5jXTwY32mq2cCSKAyCz-DR3vp4vWKbs5ndkd5ZRyADEwpYMbelrVDLTI_oUSNy8Eb2WqefJ4KjTt2PTx0a8rhSaNhiUTa9eFhFhgWIejCbcsPWbuQHm0vQ_O2sqpp_4EsGEt3U8960wbg';
+
+        async function loadPage() {
+            const id = new URLSearchParams(window.location.search).get('id');
+            if (!id) { showNotFound(); return; }
+            const p = await getProductById(id);
+            if (!p) { showNotFound(); return; }
+
+            document.title = p.name + ' | Haute Fighting Gears';
+
+            const breadCat = document.getElementById('breadcrumb-category');
+            breadCat.textContent = p.categoryName;
+            breadCat.onclick = () => { window.location.href = '../products.html?cat=' + p.categoryId; };
+            document.getElementById('breadcrumb-name').textContent = p.name;
+
+            renderProduct(p);
+            renderRelated(p);
+
+            if (typeof trackProductView === 'function') trackProductView(p.name);
+            if (typeof HFG_P !== 'undefined' && HFG_P.trackProduct) HFG_P.trackProduct('viewed', p.name, p.categoryId);
+        }
+
+        function showNotFound() {
+            document.getElementById('product-content').innerHTML = `
+                <div class="col-span-12 text-center py-40">
+                    <h2 class="font-headline-lg text-headline-lg uppercase mb-4">Product Not Found</h2>
+                    <a href="../products.html" class="bg-primary text-on-primary px-8 py-4 font-label-bold uppercase inline-block hover:bg-accent-red transition-colors">Back to Products</a>
+                </div>`;
+        }
+
+        function renderProduct(p) {
+            const img = _resolveImage(p, 0);
+            const images = p.images ? p.images.map((src, i) => _resolveImage(p, i)) : [img];
+            const variants = p.variants || [];
+            let activeVariant = variants.length > 0 ? variants[0] : null;
+            const specs = p.specs || {};
+            const specKeys = Object.keys(specs);
+            const selectedSpecs = {};
+            specKeys.forEach(key => { selectedSpecs[key] = specs[key][0]; });
+
+            const variantHTML = variants.length > 0 ? `
+                <div class="mb-6">
+                    <p class="font-label-bold uppercase mb-3" style="font-size:11px;letter-spacing:0.12em;color:#707070">Material / Type</p>
+                    <div class="flex flex-wrap gap-2" id="variant-group">
+                        ${variants.map((v, i) => `
+                        <button type="button" data-variant-id="${v.id}" onclick="selectVariant('${v.id}')"
+                            class="variant-btn font-label-bold uppercase transition-colors"
+                            style="border:1.5px solid #1b1b1b;padding:9px 16px;font-size:12px;letter-spacing:0.07em;cursor:pointer;background:${i === 0 ? '#1b1b1b' : '#fff'};color:${i === 0 ? '#fff' : '#1b1b1b'}">
+                            ${v.label}
+                        </button>`).join('')}
+                        <button type="button" data-variant-id="__custom__" onclick="selectVariant('__custom__')"
+                            class="variant-btn font-label-bold uppercase transition-colors"
+                            style="border:1.5px solid #1b1b1b;padding:9px 16px;font-size:12px;letter-spacing:0.07em;cursor:pointer;background:#fff;color:#1b1b1b">
+                            Custom
+                        </button>
+                    </div>
+                    <input id="custom-variant-input" type="text" placeholder="Enter custom type..."
+                        style="display:none;margin-top:8px;width:100%;border:1.5px solid #1b1b1b;padding:10px 12px;font-size:13px;font-family:inherit;background:#FBF9F9;outline:none;transition:border-color 0.2s" />
+                </div>` : '';
+
+            const specsHTML = specKeys.map(key => {
+                const options = specs[key];
+                const groupId = 'spec-group-' + key.replace(/\W+/g, '-').toLowerCase();
+                const customInputId = 'custom-input-' + key.replace(/\W+/g, '-').toLowerCase();
+                const btnsHTML = options.map((opt, i) => `<button type="button"
+                    onclick="handleSpecClick(this,'${key}','${opt}')"
+                    class="option-btn font-label-bold uppercase transition-colors"
+                    style="border:1.5px solid #1b1b1b;padding:8px 14px;font-size:12px;letter-spacing:0.07em;cursor:pointer;background:${i === 0 ? '#1b1b1b' : '#fff'};color:${i === 0 ? '#fff' : '#1b1b1b'}"
+                    >${opt}</button>`).join('');
+                return `<div class="mb-5">
+                    <p class="font-label-bold uppercase mb-3" style="font-size:11px;letter-spacing:0.12em;color:#707070">${key}</p>
+                    <div id="${groupId}" class="flex flex-wrap gap-2">
+                        ${btnsHTML}
+                        <button type="button"
+                            onclick="handleSpecClick(this,'${key}','__custom__')"
+                            class="option-btn font-label-bold uppercase transition-colors"
+                            style="border:1.5px solid #1b1b1b;padding:8px 14px;font-size:12px;letter-spacing:0.07em;cursor:pointer;background:#fff;color:#1b1b1b">
+                            Custom
+                        </button>
+                    </div>
+                    <input id="${customInputId}" type="text" placeholder="Enter custom..."
+                        style="display:none;margin-top:8px;width:100%;border:1.5px solid #1b1b1b;padding:10px 12px;font-size:13px;font-family:inherit;background:#FBF9F9;outline:none;transition:border-color 0.2s" />
+                </div>`;
+            }).join('');
+
+            const thumbsHTML = images.length > 1
+                ? `<div class="flex gap-2 mt-3 flex-wrap">
+                    ${images.map((src, i) => `
+                    <button onclick="document.getElementById('main-img').src='${src}';document.querySelectorAll('.thumb-btn').forEach(b=>{b.style.borderColor='#e5e5e5'});this.style.borderColor='#E10600'"
+                        class="thumb-btn w-[72px] h-[72px] overflow-hidden flex-shrink-0 bg-white flex items-center justify-center"
+                        style="border:2px solid ${i === 0 ? '#E10600' : '#e5e5e5'}">
+                        <img src="${src}" class="w-full h-full" style="object-fit:contain;padding:4px" onerror="this.parentElement.style.display='none'" />
+                    </button>`).join('')}
+                </div>` : '';
+
+            document.getElementById('product-content').innerHTML = `
+                <div class="md:col-span-6 flex flex-col">
+                    <div class="w-full bg-white flex items-center justify-center" style="aspect-ratio:1/1;border:1.5px solid #e5e5e5;overflow:hidden">
+                        <img id="main-img" src="${img}" alt="${p.name}" class="w-full h-full transition-transform duration-500"
+                            style="object-fit:contain;padding:12px" onerror="this.src='${FALLBACK_IMG}'"/>
+                    </div>
+                    ${thumbsHTML}
+                </div>
+                <div class="md:col-span-6">
+                    <div class="sticky top-28">
+                        <p class="font-label-bold uppercase mb-2" style="font-size:11px;letter-spacing:0.16em;color:#707070">${p.categoryName}</p>
+                        <h1 class="font-headline-lg text-headline-lg uppercase mb-4" style="line-height:1.05">${p.name}</h1>
+                        <p class="font-body-md leading-relaxed mb-6 pb-6" style="color:#555;border-bottom:1px solid #e5e5e5;font-size:15px">${p.description}</p>
+                        ${variantHTML}
+                        ${specsHTML}
+                        <!-- Custom Notes -->
+                        <div class="mb-5">
+                            <p class="font-label-bold uppercase mb-3" style="font-size:11px;letter-spacing:0.12em;color:#707070">Custom Notes <span style="font-weight:400;text-transform:none;font-size:11px;color:#aaa">(optional)</span></p>
+                            <textarea id="custom-notes-input" rows="3" placeholder="e.g. Logo on palm, specific packaging, delivery notes..."
+                                style="width:100%;border:1.5px solid #1b1b1b;padding:10px 12px;font-size:13px;font-family:inherit;background:#FBF9F9;resize:none"></textarea>
+                        </div>
+                        <div style="margin-top:24px">
+                            <button onclick="sendInquiry()"
+                                class="w-full bg-accent-red text-on-primary py-5 font-label-bold uppercase flex items-center justify-center gap-3 hover:bg-primary transition-colors mb-6"
+                                style="border:none;cursor:pointer">
+                                <span class="material-symbols-outlined">send</span> Send Inquiry
+                            </button>
+                        </div>
+                        <div class="flex flex-wrap gap-5 font-label-sm uppercase" style="opacity:0.4;font-size:11px">
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:15px">local_shipping</span> Ships Worldwide</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:15px">schedule</span> 1–2 Week Lead Time</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:15px">verified</span> Min. 1 Unit</span>
+                        </div>
+                    </div>
+                </div>`;
+
+            window.selectVariant = function (variantId) {
+                activeVariant = variants.find(v => v.id === variantId) || null;
+                document.querySelectorAll('.variant-btn').forEach(b => {
+                    const isActive = b.dataset.variantId === variantId;
+                    b.style.background = isActive ? '#1b1b1b' : '#fff';
+                    b.style.color = isActive ? '#fff' : '#1b1b1b';
+                });
+                const ci = document.getElementById('custom-variant-input');
+                if (ci) {
+                    ci.style.display = variantId === '__custom__' ? 'block' : 'none';
+                    if (variantId === '__custom__') ci.focus();
+                }
+            };
+
+            window.handleSpecClick = function (btn, key, val) {
+                const groupId = 'spec-group-' + key.replace(/\W+/g, '-').toLowerCase();
+                const customInputId = 'custom-input-' + key.replace(/\W+/g, '-').toLowerCase();
+                const group = document.getElementById(groupId);
+                if (group) group.querySelectorAll('.option-btn').forEach(b => { b.style.background = '#fff'; b.style.color = '#1b1b1b'; });
+                btn.style.background = '#1b1b1b';
+                btn.style.color = '#fff';
+                selectedSpecs[key] = val === '__custom__' ? '' : val;
+                const ci = document.getElementById(customInputId);
+                if (ci) {
+                    ci.style.display = val === '__custom__' ? 'block' : 'none';
+                    if (val === '__custom__') ci.focus();
+                }
+            };
+
+            window.sendInquiry = function () {
+                // Read custom variant input if active
+                const cvi = document.getElementById('custom-variant-input');
+                const variantLabel = activeVariant
+                    ? 'Type: ' + activeVariant.label
+                    : (cvi && cvi.style.display !== 'none' && cvi.value.trim())
+                        ? 'Type: ' + cvi.value.trim()
+                        : '';
+
+                // Read all spec custom inputs
+                const resolvedSpecs = {};
+                specKeys.forEach(key => {
+                    const customInputId = 'custom-input-' + key.replace(/\W+/g, '-').toLowerCase();
+                    const ci = document.getElementById(customInputId);
+                    if (ci && ci.style.display !== 'none' && ci.value.trim()) {
+                        resolvedSpecs[key] = ci.value.trim();
+                    } else {
+                        resolvedSpecs[key] = selectedSpecs[key] || '';
+                    }
+                });
+
+                // Collect custom notes
+                const notesEl = document.getElementById('custom-notes-input');
+                const customNotes = notesEl ? notesEl.value.trim() : '';
+
+                // Build auto-description
+                const specParts = Object.entries(resolvedSpecs)
+                    .filter(([, v]) => v && v !== '__custom__')
+                    .map(([k, v]) => k + ': ' + v);
+                const allParts = [variantLabel, ...specParts].filter(Boolean);
+                if (customNotes) allParts.push('Notes: ' + customNotes);
+                const description = allParts.join(' | ');
+
+                const url = '../inquiry.html?product=' + encodeURIComponent(p.id)
+                    + '&productName=' + encodeURIComponent(p.name)
+                    + '&description=' + encodeURIComponent(description);
+                window.location.href = url;
+            };
+        }
+
+        async function renderRelated(current) {
+            const all = await loadSampleProducts();
+            const same = all.filter(p => p.id !== current.id && p.categoryId === current.categoryId).slice(0, 4);
+            const list = same.length >= 1 ? same : all.filter(p => p.id !== current.id).slice(0, 4);
+            const grid = document.getElementById('related-grid');
+            const FIMG = FALLBACK_IMG;
+            grid.innerHTML = list.map(p => {
+                const img = _resolveImage(p, 0);
+                return `<a href="product.html?id=${p.id}" class="group border border-outline-variant bg-surface-container-lowest overflow-hidden flex flex-col" data-reveal style="text-decoration:none;color:inherit">
+                    <div style="width:100%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;aspect-ratio:1/1">
+                        <img src="${img}" alt="${p.name}" class="w-full h-full transition-transform duration-500 group-hover:scale-105" style="object-fit:contain;padding:6px" onerror="this.src='${FIMG}'"/>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-headline-md text-headline-md uppercase mb-1" style="font-size:15px">${p.name}</h3>
+                        <p class="font-body-md text-neutral-gray mb-3" style="font-size:11px;font-weight:400;letter-spacing:0.04em">${p.categoryName}</p>
+                        <span class="w-full bg-accent-red text-on-primary py-2 font-label-bold uppercase flex items-center justify-center gap-1 text-center" style="font-size:11px;pointer-events:none">
+                            <span class="material-symbols-outlined" style="font-size:13px">send</span> Send Inquiry
+                        </span>
+                    </div>
+                </a>`;
+            }).join('');
+            if (typeof initScrollReveal === 'function') initScrollReveal();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPage);
+    </script>
+    <script src="../js/animations.js"></script>
+
+    <!-- COOKIE POPUP -->
+    <style id="hfg-cookie-fix">
+        #hfg-cookie-popup {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            top: auto !important;
+            left: auto !important;
+            z-index: 2147483647 !important;
+            transform: none !important;
+            width: 480px;
+            max-width: calc(100vw - 40px);
+        }
+    </style>
+    <section id="hfg-cookie-popup"
+        style="position:fixed;bottom:20px;right:20px;z-index:2147483647;width:480px;max-width:calc(100vw - 40px);background:#fbf9f9;border-top:3px solid #bb0400;box-shadow:0 10px 40px rgba(0,0,0,0.18);padding:28px;font-family:'Hanken Grotesk',sans-serif;">
+        <h2
+            style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;color:#000000;line-height:1;margin:0 0 8px;letter-spacing:0.02em">
+            Cookies &amp; Privacy</h2>
+        <p style="font-size:14px;color:#1b1b1b;margin:0 0 20px;line-height:1.6;opacity:0.85">We use cookies to improve
+            your experience, save your cart, and show relevant products.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button id="hfg-accept" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#ffffff;color:#000000;border:2px solid #000000;padding:11px 28px;flex:1;min-width:130px;transition:background .2s,color .2s"
+                onmouseover="this.style.background='#000000';this.style.color='#ffffff'"
+                onmouseout="this.style.background='#ffffff';this.style.color='#000000'">Accept All</button>
+            <button id="hfg-reject" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#bb0400;color:#ffffff;border:none;padding:11px 28px;flex:1;min-width:130px;transition:background .2s"
+                onmouseover="this.style.background='#8a0300'"
+                onmouseout="this.style.background='#bb0400'">Reject</button>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var p = document.getElementById('hfg-cookie-popup');
+            if (!p) return;
+            localStorage.removeItem('hfg_cookie_consent');
+            if (localStorage.getItem('cookieConsent') === 'accepted' || localStorage.getItem('cookieConsent') === 'rejected') { p.style.display = 'none'; return; }
+            p.style.display = ''; p.style.opacity = '1'; p.style.transform = 'none';
+            function dismiss(v) {
+                localStorage.setItem('cookieConsent', v);
+                p.style.transition = 'opacity .25s, transform .25s';
+                p.style.opacity = '0'; p.style.transform = 'translateY(10px)';
+                setTimeout(function () { p.style.display = 'none'; }, 260);
+            }
+            document.getElementById('hfg-accept').onclick = function () { dismiss('accepted'); };
+            document.getElementById('hfg-reject').onclick = function () { dismiss('rejected'); };
+        })();
+    </script>
+</body>
+
+</html>

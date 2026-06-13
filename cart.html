@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart &amp; Checkout | Haute Fighting Gears</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #E10600 !important;
+            border-width: 2px
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', theme: {
+                extend: {
+                    colors: { 'primary': '#000000', 'on-primary': '#ffffff', 'accent-red': '#E10600', 'surface': '#FBF9F9', 'on-surface': '#1b1b1b', 'surface-container': '#eeeeee', 'surface-container-lowest': '#ffffff', 'surface-container-low': '#f3f3f3', 'outline-variant': '#cfc4c5', 'outline': '#747878', 'neutral-gray': '#707070', 'primary-fixed-dim': '#c6c6c6', 'on-surface-variant': '#444748', 'background': '#f9f9f9' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { 'headline-lg': ['Anton'], 'headline-md': ['Anton'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'label-bold': ['Hanken Grotesk'], 'label-sm': ['Hanken Grotesk'] },
+                    fontSize: { 'headline-lg': ['48px', { lineHeight: '44px', letterSpacing: '0.03em' }], 'headline-md': ['32px', { lineHeight: '32px', letterSpacing: '0.03em' }], 'body-lg': ['18px', { lineHeight: '28px', fontWeight: '500' }], 'body-md': ['16px', { lineHeight: '24px' }], 'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.1em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }] }
+                }
+            }
+        }
+    </script>
+    <script src="js/mobile-fixes.js"></script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md selection:bg-accent-red selection:text-white">
+    <div id="navbar-placeholder"></div>
+    <main class="pt-[72px] min-h-screen">
+        <div class="max-w-[1440px] mx-auto px-5 md:px-[64px] py-[60px]">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-10 border-b-4 border-primary pb-5">
+                <div>
+                    <h1 class="font-headline-lg text-headline-lg uppercase">YOUR CART</h1>
+                    <p class="font-label-bold text-neutral-gray uppercase mt-1"><span id="cart-item-count">0</span>
+                        item(s)</p>
+                </div>
+                <button id="clear-cart-btn"
+                    class="font-label-bold uppercase text-neutral-gray border border-neutral-gray px-4 py-2 hover:border-accent-red hover:text-accent-red transition-colors text-sm">
+                    Clear All
+                </button>
+            </div>
+
+            <!-- EMPTY STATE -->
+            <div id="cart-empty" class="hidden text-center py-40">
+                <span class="material-symbols-outlined text-8xl text-neutral-gray mb-6 block">shopping_bag</span>
+                <h2 class="font-headline-lg text-headline-lg uppercase mb-4">Your cart is empty</h2>
+                <p class="font-body-md text-neutral-gray mb-10">Browse our products and add items to your order.</p>
+                <a href="products.html"
+                    class="inline-flex items-center gap-2 bg-primary text-on-primary px-10 py-4 font-label-bold uppercase hover:bg-accent-red transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">grid_view</span> Browse Samples
+                </a>
+            </div>
+
+            <!-- ORDER SUCCESS STATE -->
+            <div id="order-success" class="hidden text-center py-24">
+                <span class="material-symbols-outlined text-8xl text-accent-red mb-6 block">check_circle</span>
+                <h2 class="font-headline-lg text-headline-lg uppercase mb-4">Order Placed Successfully!</h2>
+                <p class="font-label-bold text-neutral-gray uppercase mb-2">Order ID: <span id="order-id-display"
+                        class="text-accent-red">—</span></p>
+                <p class="font-body-lg text-body-lg text-neutral-gray mb-3 max-w-lg mx-auto" id="success-message">
+                    Your order has been received. We will contact you soon to confirm pricing and production details.
+                </p>
+                <p class="font-label-bold text-neutral-gray uppercase mb-10">Check your phone — we'll reach out within
+                    24 hours.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="products.html"
+                        class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 font-label-bold uppercase hover:bg-accent-red transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">grid_view</span> Continue Shopping
+                    </a>
+                    <a href="./"
+                        class="inline-flex items-center gap-2 border-2 border-primary px-8 py-4 font-label-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">home</span> Back to Home
+                    </a>
+                </div>
+            </div>
+
+            <!-- CART CONTENT -->
+            <div id="cart-content" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                    <!-- Left: Items -->
+                    <div class="lg:col-span-8">
+                        <div id="cart-items-list" class="space-y-4"></div>
+                        <div class="mt-8 pt-6 border-t border-outline-variant">
+                            <a href="products.html"
+                                class="inline-flex items-center gap-2 font-label-bold uppercase text-primary hover:text-accent-red transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">arrow_back</span> Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Checkout -->
+                    <div class="lg:col-span-4">
+                        <div class="bg-surface border-2 border-primary p-8 sticky top-28">
+                            <h2 class="font-headline-md text-headline-md uppercase mb-6 pb-4 border-b-2 border-primary"
+                                style="font-size:22px">ORDER SUMMARY</h2>
+
+                            <!-- Line items -->
+                            <div id="summary-lines" class="space-y-3 mb-6 pb-6 border-b border-outline-variant"></div>
+                            <div class="space-y-3 mb-8">
+                                <div class="flex justify-between font-body-md">
+                                    <span class="text-neutral-gray">Subtotal</span>
+                                    <span id="summary-subtotal" class="font-bold">$0.00</span>
+                                </div>
+                                <div class="flex justify-between font-body-md">
+                                    <span class="text-neutral-gray">Shipping</span>
+                                    <span class="font-bold text-accent-red text-sm">Confirmed after order</span>
+                                </div>
+                                <div class="flex justify-between border-t-2 border-primary pt-3 font-headline-md text-headline-md"
+                                    style="font-size:22px">
+                                    <span>TOTAL</span>
+                                    <span id="summary-total" class="text-accent-red">$0.00</span>
+                                </div>
+                            </div>
+
+                            <!-- Contact details -->
+                            <p class="font-label-bold uppercase mb-4"
+                                style="font-size:11px;letter-spacing:0.12em;color:#707070">Contact</p>
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">Full Name <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-name" type="text" placeholder="Full name"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">Phone Number <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-phone" type="tel" placeholder="+1 000 000 0000"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                            </div>
+
+                            <!-- Shipping details — REQUIRED for sample orders -->
+                            <p class="font-label-bold uppercase mb-4"
+                                style="font-size:11px;letter-spacing:0.12em;color:#707070">Shipping Details <span
+                                    class="text-accent-red">*</span></p>
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">Country <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-country" type="text" placeholder="e.g. United States"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">City <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-city" type="text" placeholder="City"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">Street Address <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-address" type="text" placeholder="Street address"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                                <div>
+                                    <label class="font-label-bold uppercase block mb-2 text-sm">Postal Code <span
+                                            class="text-accent-red">*</span></label>
+                                    <input id="checkout-postal" type="text" placeholder="Postal / ZIP code"
+                                        class="w-full border-2 border-primary p-3 font-body-md bg-surface" />
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp quotation notice -->
+                            <p class="font-body-md text-neutral-gray border border-outline-variant p-3 mb-3 leading-relaxed"
+                                style="font-size:12px">
+                                <span class="material-symbols-outlined align-middle text-[14px] mr-1"
+                                    style="color:#E10600">info</span>
+                                Note: Final price may vary slightly based on customization. Final quotation will be
+                                confirmed on WhatsApp before production.
+                            </p>
+
+                            <!-- Place Order button -->
+                            <button id="place-order-btn"
+                                class="w-full bg-accent-red text-on-primary py-5 font-label-bold uppercase flex items-center justify-center gap-3 hover:bg-primary transition-colors tracking-widest mb-3">
+                                <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                                Place Order
+                            </button>
+
+                            <p class="font-label-sm text-neutral-gray text-center uppercase mt-4 leading-relaxed"
+                                style="font-size:11px">
+                                Orders saved to our system. We'll contact you within 24 hours.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <noscript>
+        <style>
+            body::before {
+                content: "This site requires JavaScript. Please enable it to view products and navigation.";
+                display: block;
+                text-align: center;
+                padding: 40px;
+                font-family: sans-serif;
+                font-size: 16px;
+            }
+        </style>
+    </noscript>
+    <script src="js/main.js"></script>
+    <script src="js/inquiry.js"></script>
+    <script src="js/products-engine.js"></script>
+    <script src="js/personalization.js"></script>
+    <script>
+        injectNavbar('');
+        injectFooter();
+
+        // ── Render cart ───────────────────────────────────────────────
+        function renderCart() {
+            const items = Cart.getAll();
+            const empty = document.getElementById('cart-empty');
+            const content = document.getElementById('cart-content');
+            const success = document.getElementById('order-success');
+            const list = document.getElementById('cart-items-list');
+            const countEl = document.getElementById('cart-item-count');
+
+            if (countEl) countEl.textContent = Cart.getCount();
+            if (!list) return;
+
+            // Don't re-render if success screen is showing
+            if (success && !success.classList.contains('hidden')) return;
+
+            if (items.length === 0) {
+                if (empty) empty.classList.remove('hidden');
+                if (content) content.classList.add('hidden');
+                return;
+            }
+            if (empty) empty.classList.add('hidden');
+            if (content) content.classList.remove('hidden');
+
+            // Item rows — safe rendering, no undefined
+            list.innerHTML = items.map(item => {
+                const name = item.productName || 'Product';
+                const price = parseFloat(item.productPrice) || 0;
+                const qty = parseInt(item.qty) || 1;
+                const label = item.size || 'Standard';
+                const img = item.productImage || '';
+                const imgTag = img
+                    ? `<img src="${img}" alt="${name}" class="w-full h-full" style="object-fit:contain;padding:4px" onerror="this.style.display='none'"/>`
+                    : `<span class="material-symbols-outlined text-neutral-gray" style="font-size:32px">inventory_2</span>`;
+                return `
+    <div class="flex gap-4 md:gap-6 bg-surface border border-outline-variant p-4 md:p-6 items-start">
+      <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 border border-outline-variant overflow-hidden bg-white flex items-center justify-center">
+        ${imgTag}
+      </div>
+      <div class="flex-grow min-w-0">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h3 class="font-headline-md text-headline-md uppercase leading-tight mb-1" style="font-size:17px">${name}</h3>
+            <span class="inline-block bg-primary text-on-primary font-label-sm px-2 py-1 uppercase mb-3" style="font-size:11px">${label}</span>
+          </div>
+          <button data-remove="${item.key}" class="remove-btn text-neutral-gray hover:text-accent-red transition-colors shrink-0 p-1">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center border-2 border-primary">
+            <button data-key="${item.key}" data-action="minus" class="qty-btn px-3 py-2 hover:bg-primary hover:text-on-primary transition-colors font-bold">&minus;</button>
+            <span class="px-4 py-2 font-label-bold border-x-2 border-primary min-w-[44px] text-center">${qty}</span>
+            <button data-key="${item.key}" data-action="plus"  class="qty-btn px-3 py-2 hover:bg-primary hover:text-on-primary transition-colors font-bold">+</button>
+          </div>
+          <span class="font-headline-md text-headline-md text-accent-red" style="font-size:20px">$${(price * qty).toFixed(2)}</span>
+        </div>
+        <p class="font-label-sm text-neutral-gray uppercase mt-2" style="font-size:11px">$${price.toFixed(2)} each</p>
+      </div>
+    </div>`;
+            }).join('');
+
+            // Summary lines — safe rendering
+            const summaryEl = document.getElementById('summary-lines');
+            if (summaryEl) {
+                summaryEl.innerHTML = items.map(item => {
+                    const name = item.productName || 'Product';
+                    const price = parseFloat(item.productPrice) || 0;
+                    const qty = parseInt(item.qty) || 1;
+                    const label = item.size || 'Standard';
+                    return `
+      <div class="flex justify-between items-start gap-2 font-body-md">
+        <span class="text-neutral-gray leading-tight" style="font-size:13px">${name}<br/>
+          <span class="font-label-sm uppercase" style="font-size:11px">${label} &times; ${qty}</span>
+        </span>
+        <span class="font-bold shrink-0">$${(price * qty).toFixed(2)}</span>
+      </div>`;
+                }).join('');
+            }
+
+            const total = Cart.getTotal();
+            const subEl = document.getElementById('summary-subtotal');
+            const totEl = document.getElementById('summary-total');
+            if (subEl) subEl.textContent = `$${total.toFixed(2)}`;
+            if (totEl) totEl.textContent = `$${total.toFixed(2)}`;
+
+            // Update cart badge
+            updateCartBadge();
+
+            // Remove buttons
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', () => { Cart.removeItem(btn.dataset.remove); renderCart(); showToast('Item removed', 'error'); });
+            });
+
+            // Qty buttons
+            document.querySelectorAll('.qty-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = Cart.getAll().find(i => i.key === btn.dataset.key);
+                    if (!item) return;
+                    Cart.updateQty(btn.dataset.key, btn.dataset.action === 'plus' ? item.qty + 1 : item.qty - 1);
+                    renderCart();
+                });
+            });
+        }
+
+        // ── Place Order ───────────────────────────────────────────────
+        function placeOrder() {
+            const name = document.getElementById('checkout-name')?.value.trim() || '';
+            const phone = document.getElementById('checkout-phone')?.value.trim() || '';
+            const country = document.getElementById('checkout-country')?.value.trim() || '';
+            const city = document.getElementById('checkout-city')?.value.trim() || '';
+            const address = document.getElementById('checkout-address')?.value.trim() || '';
+            const postal = document.getElementById('checkout-postal')?.value.trim() || '';
+
+            // ── Full validation for sample orders ─────────────────────
+            if (!name) { highlight('checkout-name', 'Please enter your full name.'); return; }
+            if (!phone) { highlight('checkout-phone', 'Please enter your phone number.'); return; }
+            if (!country) { highlight('checkout-country', 'Country is required.'); return; }
+            if (!city) { highlight('checkout-city', 'City is required.'); return; }
+            if (!address) { highlight('checkout-address', 'Street address is required.'); return; }
+            if (!postal) { highlight('checkout-postal', 'Postal code is required.'); return; }
+
+            if (Cart.getCount() === 0) {
+                showToast('Your cart is empty.', 'error');
+                return;
+            }
+
+            const orderId = generateOrderId();
+
+            const cartItems = Cart.getAll().map(i => ({
+                product: i.productName || 'Product',
+                variant: i.size || 'Standard',
+                qty: parseInt(i.qty) || 1,
+                unitPrice: parseFloat(i.productPrice) || 0,
+                lineTotal: ((parseFloat(i.productPrice) || 0) * (parseInt(i.qty) || 1)).toFixed(2)
+            }));
+
+            const orderData = {
+                orderId, name, phone,
+                country, city, address, postal,
+                type: 'sample',
+                items: cartItems,
+                subtotal: Cart.getTotal().toFixed(2)
+            };
+
+            // Disable button
+            const btn = document.getElementById('place-order-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Placing Order...';
+
+            // Build orderDataArray — SAMPLE_ORDERS columns (no Order Type, handled by type field)
+            const orderDataArray = cartItems.map((item, idx) => ({
+                'Order ID': idx === 0 ? orderId : '',
+                'Name': idx === 0 ? name : '',
+                'Phone': idx === 0 ? phone : '',
+                'Product': item.product || 'Unknown Product',
+                'Variant': item.variant || 'Standard',
+                'Quantity': item.qty,
+                'Unit Price': item.unitPrice > 0 ? '$' + parseFloat(item.unitPrice).toFixed(2) : '$0.00',
+                'Total Price': item.lineTotal > 0 ? '$' + parseFloat(item.lineTotal).toFixed(2) : '$0.00',
+                'Country': idx === 0 ? country : '',
+                'City': idx === 0 ? city : '',
+                'Address': idx === 0 ? address : '',
+                'Postal Code': idx === 0 ? postal : '',
+                'Date': idx === 0 ? new Date().toLocaleString() : ''
+            }));
+
+            // type:'sample' routes to SAMPLE_ORDERS sheet
+            sendOrderToSheet(orderDataArray, 'sample');
+
+            // Save location for auto-fill next time
+            saveUserLocation(country, city, address, postal);
+
+            // Show success screen
+            Cart.clear();
+            document.getElementById('cart-content').classList.add('hidden');
+            document.getElementById('cart-empty').classList.add('hidden');
+            document.getElementById('order-success').classList.remove('hidden');
+            const orderIdEl = document.getElementById('order-id-display');
+            if (orderIdEl) orderIdEl.textContent = orderId;
+            updateCartBadge();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── Highlight invalid field ────────────────────────────────────
+        function highlight(id, message) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.style.borderColor = '#E10600';
+                el.focus();
+                el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
+            }
+            showToast(message, 'error');
+        }
+
+        // ── Init ──────────────────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            document.addEventListener('cartUpdated', renderCart);
+
+            // Re-check cookie consent when cart page opens — HFG.checkCookieConsent was removed; cookie popup handles itself
+
+            // Auto-fill location if previously saved
+            fillUserLocation();
+            if (typeof HFG_P !== 'undefined' && HFG_P.fillLocation) HFG_P.fillLocation();
+
+            // Place order
+            const placeBtn = document.getElementById('place-order-btn');
+            if (placeBtn) placeBtn.addEventListener('click', placeOrder);
+
+            // Clear cart
+            const clearBtn = document.getElementById('clear-cart-btn');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    if (Cart.getCount() === 0) return;
+                    if (confirm('Remove all items from your cart?')) { Cart.clear(); renderCart(); }
+                });
+            }
+        });
+    </script>
+    <script src="js/animations.js"></script>
+    <!-- COOKIE POPUP — direct child of body, fixed bottom-right -->
+    <section id="hfg-cookie-popup"
+        style="position:fixed;bottom:20px;right:20px;z-index:2147483647;width:480px;max-width:calc(100vw - 40px);background:#fbf9f9;border-top:3px solid #bb0400;box-shadow:0 10px 40px rgba(0,0,0,0.18);padding:28px;font-family:'Hanken Grotesk',sans-serif;">
+        <h2
+            style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;color:#000000;line-height:1;margin:0 0 8px;letter-spacing:0.02em">
+            Cookies &amp; Privacy</h2>
+        <p style="font-size:14px;color:#1b1b1b;margin:0 0 20px;line-height:1.6;opacity:0.85">We use cookies to improve
+            your experience, save your cart, and show relevant products.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button id="hfg-accept" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#ffffff;color:#000000;border:2px solid #000000;padding:11px 28px;flex:1;min-width:130px;transition:background .2s,color .2s"
+                onmouseover="this.style.background='#000000';this.style.color='#ffffff'"
+                onmouseout="this.style.background='#ffffff';this.style.color='#000000'">Accept All</button>
+            <button id="hfg-reject" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#bb0400;color:#ffffff;border:none;padding:11px 28px;flex:1;min-width:130px;transition:background .2s"
+                onmouseover="this.style.background='#8a0300'"
+                onmouseout="this.style.background='#bb0400'">Reject</button>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var p = document.getElementById('hfg-cookie-popup');
+            if (!p) return;
+            localStorage.removeItem('hfg_cookie_consent');
+            if (localStorage.getItem('cookieConsent') === 'accepted' || localStorage.getItem('cookieConsent') === 'rejected') { p.style.display = 'none'; return; }
+            p.style.display = ''; p.style.opacity = '1'; p.style.transform = 'none';
+            function dismiss(v) {
+                localStorage.setItem('cookieConsent', v);
+                p.style.transition = 'opacity .25s, transform .25s';
+                p.style.opacity = '0';
+                p.style.transform = 'translateY(10px)';
+                setTimeout(function () { p.style.display = 'none'; }, 260);
+            }
+            document.getElementById('hfg-accept').onclick = function () { dismiss('accepted'); };
+            document.getElementById('hfg-reject').onclick = function () { dismiss('rejected'); };
+        })();
+    </script>
+</body>
+
+</html>

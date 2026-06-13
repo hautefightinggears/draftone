@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manufacturing Inquiry | Haute Fighting Gears</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #E10600 !important;
+            border-width: 2px
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', theme: {
+                extend: {
+                    colors: { 'primary': '#000000', 'on-primary': '#ffffff', 'accent-red': '#E10600', 'surface': '#FBF9F9', 'on-surface': '#1b1b1b', 'surface-container': '#eeeeee', 'surface-container-lowest': '#ffffff', 'surface-container-low': '#f3f3f3', 'outline-variant': '#cfc4c5', 'outline': '#747878', 'neutral-gray': '#707070', 'primary-fixed-dim': '#c6c6c6', 'on-surface-variant': '#444748', 'background': '#f9f9f9' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { 'headline-lg': ['Anton'], 'display-md': ['Anton'], 'headline-md': ['Anton'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'label-bold': ['Hanken Grotesk'], 'label-sm': ['Hanken Grotesk'] },
+                    fontSize: { 'display-md': ['64px', { lineHeight: '60px', letterSpacing: '0.02em' }], 'headline-lg': ['48px', { lineHeight: '44px', letterSpacing: '0.03em' }], 'headline-md': ['32px', { lineHeight: '32px', letterSpacing: '0.03em' }], 'body-lg': ['18px', { lineHeight: '28px', fontWeight: '500' }], 'body-md': ['16px', { lineHeight: '24px' }], 'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.1em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }] }
+                }
+            }
+        }
+    </script>
+    <script src="js/mobile-fixes.js"></script>
+</head>
+
+<body class="bg-background text-on-surface font-body-md selection:bg-accent-red selection:text-white">
+    <div id="navbar-placeholder"></div>
+    <main class="pt-[72px]">
+
+        <!-- Hero -->
+        <section class="text-on-primary px-5 md:px-[64px] py-[80px]"
+            style="background: linear-gradient(rgba(0,0,0,0.65),rgba(0,0,0,0.65)), url('images/bulk-thumb.webp') center/cover no-repeat; background-color: #000;">
+            <div class="max-w-[1440px] mx-auto">
+                <p class="font-label-bold text-accent-red uppercase mb-4 tracking-widest">Manufacturing Inquiry</p>
+                <h1 class="font-display-md text-display-md uppercase leading-none mb-4">INQUIRY</h1>
+                <p class="font-body-lg text-body-lg opacity-70 max-w-xl">
+                    For manufacturing orders of 20+ units. Submit your requirements and our team will respond within 24
+                    hours with pricing, lead times, and full production details.
+                </p>
+            </div>
+        </section>
+
+        <!-- Form + Sidebar -->
+        <section class="px-5 md:px-[64px] py-[80px] max-w-[1440px] mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+                <!-- FORM -->
+                <div class="lg:col-span-7">
+
+                    <!-- Success state -->
+                    <div id="bulk-success"
+                        class="hidden bg-surface-container-lowest border-2 border-primary p-12 text-center">
+                        <span class="material-symbols-outlined text-7xl text-accent-red mb-6 block">check_circle</span>
+                        <h2 class="font-headline-lg text-headline-lg uppercase mb-4">Inquiry Submitted!</h2>
+                        <p class="font-body-lg text-body-lg text-neutral-gray mb-3 max-w-md mx-auto">
+                            Your manufacturing inquiry has been received. Our team will contact you within 24 hours.
+                        </p>
+                        <p class="font-label-bold text-neutral-gray uppercase mb-8">We'll reach out within 24 hours.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="products.html"
+                                class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 font-label-bold uppercase hover:bg-accent-red transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">grid_view</span> View Products
+                            </a>
+                            <a href="./"
+                                class="inline-flex items-center gap-2 border-2 border-primary px-8 py-4 font-label-bold uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                                <span class="material-symbols-outlined text-[18px]">home</span> Back to Home
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Form -->
+                    <div id="bulk-form-wrap" class="bg-surface-container-lowest border-2 border-primary p-8 md:p-12">
+                        <h2 class="font-headline-md text-headline-md uppercase mb-2 pb-4 border-b-2 border-primary"
+                            style="font-size:22px">MANUFACTURING INQUIRY</h2>
+
+                        <form id="bulk-order-form" class="space-y-6 mt-6" novalidate>
+
+                            <!-- Product Name (auto-filled, shown read-only) -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-product">Product of Interest <span
+                                        class="text-accent-red">*</span></label>
+                                <select id="b-product"
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full">
+                                    <option value="">Loading products...</option>
+                                </select>
+                            </div>
+
+                            <!-- Description (auto-filled, editable) -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-notes">
+                                    Description &amp; Requirements
+                                    <span class="font-body-md text-neutral-gray normal-case ml-2">(optional)</span>
+                                </label>
+                                <textarea id="b-notes" rows="4"
+                                    placeholder="e.g. Custom logo, black/gold colorway, size breakdown: 10×M, 20×L..."
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full resize-none"></textarea>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-name">Full Name <span
+                                        class="text-accent-red">*</span></label>
+                                <input id="b-name" type="text" placeholder="Your full name"
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full" />
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-email">Email <span
+                                        class="text-accent-red">*</span></label>
+                                <input id="b-email" type="email" placeholder="you@email.com"
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full" />
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-phone">Phone / WhatsApp <span
+                                        class="text-accent-red">*</span></label>
+                                <input id="b-phone" type="tel" placeholder="+1 000 000 0000"
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full" />
+                            </div>
+
+                            <!-- Quantity -->
+                            <div class="flex flex-col gap-2">
+                                <label class="font-label-bold uppercase" for="b-qty">Quantity <span
+                                        class="text-accent-red">*</span></label>
+                                <input id="b-qty" type="number" min="1" placeholder="e.g. 50"
+                                    class="bg-surface border-2 border-primary p-4 font-body-md w-full md:w-48" />
+                            </div>
+
+                            <!-- Submit -->
+                            <button id="bulk-submit-btn" type="submit"
+                                class="w-full bg-accent-red text-on-primary py-6 font-label-bold uppercase flex items-center justify-center gap-3 hover:bg-primary transition-colors tracking-widest">
+                                <span class="material-symbols-outlined">send</span> Submit Inquiry
+                            </button>
+                            <p class="font-label-sm text-neutral-gray text-center tracking-widest"
+                                style="text-transform:none;font-size:13px">
+                                Our team will respond within 24 hours with pricing and production details.
+                            </p>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="lg:col-span-5 flex flex-col gap-6">
+
+                    <!-- Why Inquire? -->
+                    <div class="bg-primary text-on-primary p-8" data-reveal>
+                        <h3 class="font-headline-md text-headline-md uppercase mb-6 pb-4 border-b border-on-primary/20"
+                            style="font-size:20px">WHY WORK WITH US?</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <span
+                                    class="material-symbols-outlined text-accent-red shrink-0 mt-0.5">check_circle</span>
+                                <p class="font-body-md opacity-80">Better pricing for large manufacturing orders</p>
+                            </div>
+                            <div class="flex gap-4">
+                                <span
+                                    class="material-symbols-outlined text-accent-red shrink-0 mt-0.5">check_circle</span>
+                                <p class="font-body-md opacity-80">Priority production scheduling</p>
+                            </div>
+                            <div class="flex gap-4">
+                                <span
+                                    class="material-symbols-outlined text-accent-red shrink-0 mt-0.5">check_circle</span>
+                                <p class="font-body-md opacity-80">Full custom branding — logos, colors, design</p>
+                            </div>
+                            <div class="flex gap-4">
+                                <span
+                                    class="material-symbols-outlined text-accent-red shrink-0 mt-0.5">check_circle</span>
+                                <p class="font-body-md opacity-80">Worldwide shipping available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manufacturing Standards -->
+                    <div class="bg-surface border-2 border-primary p-8" data-reveal>
+                        <h3 class="font-label-bold uppercase mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-accent-red">verified</span> MANUFACTURING
+                            STANDARDS
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex justify-between border-b border-outline-variant pb-3 font-body-md">
+                                <span class="text-neutral-gray">Material</span>
+                                <span class="font-bold">Leather / synthetic</span>
+                            </li>
+                            <li class="flex justify-between border-b border-outline-variant pb-3 font-body-md">
+                                <span class="text-neutral-gray">Customization</span>
+                                <span class="font-bold">Logo, color, design</span>
+                            </li>
+                            <li class="flex justify-between border-b border-outline-variant pb-3 font-body-md">
+                                <span class="text-neutral-gray">Minimum order</span>
+                                <span class="font-bold">20 units</span>
+                            </li>
+                            <li class="flex justify-between font-body-md">
+                                <span class="text-neutral-gray">Lead time</span>
+                                <span class="font-bold">1–2 Week Lead Time</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer-placeholder"></div>
+    <noscript>
+        <style>
+            body::before {
+                content: "This site requires JavaScript. Please enable it to view products and navigation.";
+                display: block;
+                text-align: center;
+                padding: 40px;
+                font-family: sans-serif;
+                font-size: 16px;
+            }
+        </style>
+    </noscript>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products-engine.js"></script>
+    <script>
+        injectNavbar('bulk');
+        injectFooter();
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // ── Load product dropdown ──────────────────────────────────────────
+            const sel = document.getElementById('b-product');
+            try {
+                sel.innerHTML = await buildProductOptions(null);
+                if (!sel.options.length || (sel.options.length === 1 && sel.options[0].value === '')) {
+                    throw new Error('No options loaded');
+                }
+            } catch (err) {
+                // Direct fallback fetch
+                try {
+                    const res = await fetch('./products/products.json');
+                    const data = await res.json();
+                    sel.innerHTML = '<option value="">— Select a product —</option>';
+                    data.categories.forEach(cat => {
+                        const group = document.createElement('optgroup');
+                        group.label = cat.name;
+                        cat.products.forEach(p => {
+                            if (!p.id || !p.name) return;
+                            const opt = document.createElement('option');
+                            opt.value = p.id;
+                            opt.textContent = p.name;
+                            group.appendChild(opt);
+                        });
+                        sel.appendChild(group);
+                    });
+                } catch (e2) {
+                    sel.innerHTML = '<option value="">— Could not load products —</option>';
+                    console.error('[bulk] Failed to load products:', e2);
+                }
+            }
+
+            // ── Auto-fill from URL ?product= & ?description= ─────────────────
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlProduct = urlParams.get('product');
+            const urlProductName = urlParams.get('productName');
+            const urlDescription = urlParams.get('description');
+
+            if (urlProduct) {
+                for (const opt of sel.options) {
+                    if (opt.value === urlProduct) { opt.selected = true; break; }
+                }
+            } else if (urlProductName) {
+                for (const opt of sel.options) {
+                    if (opt.text.toLowerCase().includes(urlProductName.toLowerCase())) { opt.selected = true; break; }
+                }
+            }
+
+            if (urlDescription) {
+                const notesEl = document.getElementById('b-notes');
+                if (notesEl && !notesEl.value) notesEl.value = urlDescription;
+            }
+
+            document.getElementById('bulk-order-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('b-name').value.trim();
+                const phone = document.getElementById('b-phone').value.trim();
+                const email = document.getElementById('b-email').value.trim();
+                const selEl = document.getElementById('b-product');
+                const product = selEl.value;
+                const productName = selEl.options[selEl.selectedIndex] ? selEl.options[selEl.selectedIndex].text : product;
+                const qty = parseInt(document.getElementById('b-qty').value);
+                const notes = document.getElementById('b-notes').value.trim();
+
+                if (!name) { showToast('Please enter your name', 'error'); return; }
+                if (!email && !phone) { showToast('Please enter your email or phone number', 'error'); return; }
+                if (!product) { showToast('Please select a product', 'error'); return; }
+                if (!qty || qty < 1) { showToast('Please enter a valid quantity', 'error'); return; }
+
+                const orderId = generateOrderId();
+
+                const btn = document.getElementById('bulk-submit-btn');
+                btn.disabled = true;
+                btn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Submitting...';
+
+                const orderDataArray = [{
+                    'Order ID': orderId,
+                    'Name': name,
+                    'Phone': phone,
+                    'Email': email || '',
+                    'Product': productName || 'Unknown Product',
+                    'Quantity': qty,
+                    'Description': notes || '',
+                    'Date': new Date().toLocaleString()
+                }];
+
+                sendOrderToSheet(orderDataArray, 'bulk');
+
+                document.getElementById('bulk-form-wrap').classList.add('hidden');
+                document.getElementById('bulk-success').classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    <script src="js/animations.js"></script>
+    <!-- COOKIE POPUP — direct child of body, fixed bottom-right -->
+    <section id="hfg-cookie-popup"
+        style="position:fixed;bottom:20px;right:20px;z-index:2147483647;width:480px;max-width:calc(100vw - 40px);background:#fbf9f9;border-top:3px solid #bb0400;box-shadow:0 10px 40px rgba(0,0,0,0.18);padding:28px;font-family:'Hanken Grotesk',sans-serif;">
+        <h2
+            style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;color:#000000;line-height:1;margin:0 0 8px;letter-spacing:0.02em">
+            Cookies &amp; Privacy</h2>
+        <p style="font-size:14px;color:#1b1b1b;margin:0 0 20px;line-height:1.6;opacity:0.85">We use cookies to improve
+            your experience, save your cart, and show relevant products.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button id="hfg-accept" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#ffffff;color:#000000;border:2px solid #000000;padding:11px 28px;flex:1;min-width:130px;transition:background .2s,color .2s"
+                onmouseover="this.style.background='#000000';this.style.color='#ffffff'"
+                onmouseout="this.style.background='#ffffff';this.style.color='#000000'">Accept All</button>
+            <button id="hfg-reject" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#bb0400;color:#ffffff;border:none;padding:11px 28px;flex:1;min-width:130px;transition:background .2s"
+                onmouseover="this.style.background='#8a0300'"
+                onmouseout="this.style.background='#bb0400'">Reject</button>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var p = document.getElementById('hfg-cookie-popup');
+            if (!p) return;
+            localStorage.removeItem('hfg_cookie_consent');
+            if (localStorage.getItem('cookieConsent') === 'accepted' || localStorage.getItem('cookieConsent') === 'rejected') { p.style.display = 'none'; return; }
+            p.style.display = ''; p.style.opacity = '1'; p.style.transform = 'none';
+            function dismiss(v) {
+                localStorage.setItem('cookieConsent', v);
+                p.style.transition = 'opacity .25s, transform .25s';
+                p.style.opacity = '0';
+                p.style.transform = 'translateY(10px)';
+                setTimeout(function () { p.style.display = 'none'; }, 260);
+            }
+            document.getElementById('hfg-accept').onclick = function () { dismiss('accepted'); };
+            document.getElementById('hfg-reject').onclick = function () { dismiss('rejected'); };
+        })();
+    </script>
+</body>
+
+</html>

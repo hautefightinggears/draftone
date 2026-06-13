@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Boxing Gloves &amp; MMA Gear Manufacturer | Haute Fighting Gears</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+    <link rel="shortcut icon" href="./images/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        }
+
+        /* ── MOBILE HORIZONTAL CAROUSEL — applies to product grids ── */
+        /* Only activates on screens <= 768px. Desktop is untouched.  */
+        @media (max-width: 768px) {
+
+            /* SCROLL CONTAINER FIX */
+            #what-we-make-grid,
+            #featured-grid {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto !important;
+                gap: 12px !important;
+
+                scroll-snap-type: x mandatory !important;
+                -webkit-overflow-scrolling: touch !important;
+
+                /* ✅ CLEAN SPACING (FIXED) */
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+
+                /* ❌ REMOVE BROKEN EDGE HACK */
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                width: 100% !important;
+
+                box-sizing: border-box !important;
+
+                scrollbar-width: none !important;
+            }
+
+            #what-we-make-grid::-webkit-scrollbar,
+            #featured-grid::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            /* CARD SIZE */
+            #what-we-make-grid>*,
+            #featured-grid>* {
+                flex: 0 0 80% !important;
+                max-width: 80% !important;
+                scroll-snap-align: start !important;
+            }
+
+            /* ✅ PERFECT EDGE GAP FIX */
+            #what-we-make-grid::before,
+            #featured-grid::before {
+                content: "";
+                flex: 0 0 16px;
+            }
+
+            #what-we-make-grid::after,
+            #featured-grid::after {
+                content: "";
+                flex: 0 0 16px;
+            }
+
+
+            /* Last card gets right margin so it doesn't snap hard to edge */
+            #what-we-make-grid>*:last-child,
+            #featured-grid>*:last-child {
+                margin-right: 16px !important;
+            }
+        }
+
+        /* WHAT WE MAKE — premium hover effect */
+        #what-we-make-grid a img {
+            filter: brightness(0.92);
+            transition: all 0.4s ease;
+        }
+
+        #what-we-make-grid a:hover img {
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        #what-we-make-grid a:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ── HOME PAGE — mobile footer spacing fix ──────────────────── */
+        /* Scoped to .home-page — zero effect on any other page.        */
+        /* All inside @media (max-width: 768px) — desktop unchanged.    */
+        @media (max-width: 768px) {
+
+            /* Reduce the footer's 80px vertical padding to something tighter */
+            .home-page footer>div.grid {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            /* Tighten gap between accordion sections in footer */
+            .home-page footer .hfg-footer-section {
+                margin-bottom: 0 !important;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', theme: {
+                extend: {
+                    colors: { 'primary': '#000000', 'on-primary': '#ffffff', 'accent-red': '#E10600', 'surface': '#FBF9F9', 'on-surface': '#1b1b1b', 'surface-container': '#eeeeee', 'surface-container-lowest': '#ffffff', 'surface-container-low': '#f3f3f3', 'surface-container-high': '#e8e8e8', 'outline-variant': '#cfc4c5', 'outline': '#747878', 'neutral-gray': '#707070', 'primary-fixed-dim': '#c6c6c6', 'on-surface-variant': '#444748', 'background': '#f9f9f9', 'primary-container': '#1b1b1b', 'on-primary-fixed': '#1b1b1b' },
+                    borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
+                    fontFamily: { 'headline-lg': ['Anton'], 'display-lg': ['Anton'], 'display-md': ['Anton'], 'headline-md': ['Anton'], 'body-md': ['Hanken Grotesk'], 'body-lg': ['Hanken Grotesk'], 'label-bold': ['Hanken Grotesk'], 'label-sm': ['Hanken Grotesk'] },
+                    fontSize: { 'display-lg': ['96px', { lineHeight: '90px', letterSpacing: '0.02em' }], 'display-md': ['64px', { lineHeight: '60px', letterSpacing: '0.02em' }], 'headline-lg': ['48px', { lineHeight: '44px', letterSpacing: '0.03em' }], 'headline-md': ['32px', { lineHeight: '32px', letterSpacing: '0.03em' }], 'body-lg': ['18px', { lineHeight: '28px', fontWeight: '500' }], 'body-md': ['16px', { lineHeight: '24px' }], 'label-bold': ['14px', { lineHeight: '20px', letterSpacing: '0.1em', fontWeight: '700' }], 'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.05em', fontWeight: '600' }] }
+                }
+            }
+        }
+    </script>
+    <script src="js/mobile-fixes.js"></script>
+</head>
+
+<body class="home-page bg-surface text-on-surface font-body-md overflow-x-hidden">
+    <div id="navbar-placeholder"></div>
+    <main>
+
+        <!-- ── HERO ──────────────────────────────────────────────────── -->
+        <section class="relative min-h-screen flex items-end bg-primary overflow-hidden">
+            <img id="hero-bg-img" src="images/home-thumb.webp" alt="Haute Fighting Gears"
+                class="absolute inset-0 w-full h-full object-cover"
+                style="opacity:0.55;filter:brightness(1.05);transform-origin:center center;will-change:transform"
+                onerror="this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuBO_fPNVoudbEuCnW7SZrGfR6txv8-oxGf-UWxuLs2A42AY2yFta20cOzDyXBUFXKgycM-UCiX3Sx18jNWOTa6byisk3D3gXDQK-fuLNRKFKkIIOZukPB9p7BBTdIuY5od1YOjcNG59sc4yX0NLCfWNQEdvUSRFUgK7g0y4tyEBaJ1cgxo2Jt7O2oNYb8Zik0HeyeDmGJVS7dTMfSLdGatfzDesQMj1kDUSobfRXcDFoZ6USV5wrRbdOVqCMt5iCD5meh6bYqlR7v0'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent"></div>
+            <div id="hero-content" class="relative z-10 px-5 md:px-[64px] pb-[80px] pt-32 w-full max-w-[1440px] mx-auto"
+                style="opacity:0;transform:translateY(32px)">
+                <h1
+                    class="font-display-md text-display-md md:font-display-lg md:text-display-lg text-on-primary uppercase leading-none mb-8">
+                    CUSTOM BOXING GLOVES<br /><span class="text-accent-red">&amp; MMA GEAR</span><br />MANUFACTURER.
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-primary opacity-70 max-w-xl mb-10">
+                    We manufacture custom fight gear for brands, gyms, and businesses worldwide. Built for performance,
+                    durability, and full brand customization.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="products.html"
+                        class="inline-flex items-center justify-center gap-2 bg-on-primary text-primary px-8 py-4 font-label-bold uppercase hover:bg-accent-red hover:text-on-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">grid_view</span> View Products
+                    </a>
+                    <a href="inquiry.html"
+                        class="inline-flex items-center justify-center gap-2 border-2 border-on-primary text-on-primary px-8 py-4 font-label-bold uppercase hover:bg-on-primary hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">send</span> Send Inquiry
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── WHAT WE MAKE ───────────────────────────────────────────── -->
+        <section class="px-5 md:px-[64px] py-[80px] max-w-[1440px] mx-auto">
+            <div class="mb-12" data-reveal>
+                <p class="font-label-bold text-accent-red uppercase mb-3 tracking-widest">Our Products</p>
+                <h2 class="font-headline-lg text-headline-lg uppercase">WHAT WE MAKE</h2>
+            </div>
+            <!-- Dynamic grid — populated by JS below. Falls back to static if products fail to load. -->
+            <div id="what-we-make-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Loading state -->
+                <div class="col-span-3 text-center py-16 opacity-100">
+                    <span class="font-label-bold uppercase">Loading...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── HOW IT WORKS ──────────────────────────────────────────── -->
+        <section class="bg-surface-container px-5 md:px-[64px] py-[80px]">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="mb-12" data-reveal>
+                    <p class="font-label-bold text-accent-red uppercase mb-3 tracking-widest">Process</p>
+                    <h2 class="font-headline-lg text-headline-lg uppercase">HOW IT WORKS</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="bg-surface-container-lowest border border-outline-variant p-8" data-reveal>
+                        <div class="text-accent-red opacity-20 font-display-md text-display-md leading-none mb-4">01
+                        </div>
+                        <span class="material-symbols-outlined text-[36px] text-primary mb-4 block">description</span>
+                        <h3 class="font-headline-md text-headline-md uppercase mb-3" style="font-size:20px">Share Your
+                            Requirements</h3>
+                        <p class="font-body-md text-neutral-gray">Send us your design, logo, and product details.</p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant p-8" data-reveal>
+                        <div class="text-accent-red opacity-20 font-display-md text-display-md leading-none mb-4">02
+                        </div>
+                        <span class="material-symbols-outlined text-[36px] text-primary mb-4 block">task_alt</span>
+                        <h3 class="font-headline-md text-headline-md uppercase mb-3" style="font-size:20px">Confirm
+                            Design &amp; Details</h3>
+                        <p class="font-body-md text-neutral-gray">We review and confirm specs, pricing, and timeline.
+                        </p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant p-8" data-reveal>
+                        <div class="text-accent-red opacity-20 font-display-md text-display-md leading-none mb-4">03
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-[36px] text-primary mb-4 block">precision_manufacturing</span>
+                        <h3 class="font-headline-md text-headline-md uppercase mb-3" style="font-size:20px">Production
+                            Begins</h3>
+                        <p class="font-body-md text-neutral-gray">Your private label fight gear is manufactured to spec.
+                        </p>
+                    </div>
+                    <div class="bg-surface-container-lowest border border-outline-variant p-8" data-reveal>
+                        <div class="text-accent-red opacity-20 font-display-md text-display-md leading-none mb-4">04
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-[36px] text-primary mb-4 block">local_shipping</span>
+                        <h3 class="font-headline-md text-headline-md uppercase mb-3" style="font-size:20px">Delivered
+                            Worldwide</h3>
+                        <p class="font-body-md text-neutral-gray">Bulk boxing gloves and MMA gear shipped to your door.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FEATURED GEAR ───────────────────────────────────────── -->
+        <section class="bg-surface-container-low px-5 md:px-[64px] py-[80px]">
+            <div class="max-w-[1440px] mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12" data-reveal>
+                    <div>
+                        <p class="font-label-bold text-accent-red uppercase mb-3 tracking-widest">Portfolio</p>
+                        <h2 class="font-headline-lg text-headline-lg uppercase">FEATURED PRODUCTS</h2>
+                        <p class="font-body-md text-neutral-gray mt-3">Custom boxing gloves, MMA gear, and fight
+                            equipment made for your brand.</p>
+                    </div>
+                    <a href="products.html"
+                        class="inline-flex items-center gap-2 border-2 border-primary px-6 py-3 font-label-bold uppercase hover:bg-primary hover:text-on-primary transition-colors self-start">
+                        View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+                </div>
+                <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- ── CUSTOM ORDER CTA ───────────────────────────────────────── -->
+        <section class="px-5 md:px-[64px] py-[80px] bg-primary border-y-4 border-accent-red">
+            <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+                <div data-reveal>
+                    <p class="font-label-bold text-accent-red uppercase mb-3 tracking-widest">Start Your Brand</p>
+                    <h2 class="font-headline-lg text-headline-lg text-on-primary uppercase">START YOUR<br />FIGHT GEAR
+                        BRAND
+                    </h2>
+                    <p class="font-body-lg text-body-lg text-on-primary opacity-60 mt-4 max-w-lg">Looking for a custom
+                        boxing gloves manufacturer or MMA gear supplier? We produce high-quality private label fight
+                        gear under your brand.</p>
+                </div>
+                <div class="flex flex-col gap-4 shrink-0" data-reveal>
+                    <a href="inquiry.html"
+                        class="inline-flex items-center justify-center gap-2 bg-accent-red text-on-primary px-10 py-5 font-label-bold uppercase hover:bg-on-primary hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">send</span> Send Inquiry
+                    </a>
+                    <a href="Contact.html"
+                        class="inline-flex items-center justify-center gap-2 border-2 border-on-primary text-on-primary px-10 py-4 font-label-bold uppercase hover:bg-on-primary hover:text-primary transition-colors text-sm">
+                        <span class="material-symbols-outlined text-[16px]">support_agent</span> Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── TRUST STRIP ────────────────────────────────────────────── -->
+        <section class="px-5 md:px-[64px] py-[80px] max-w-[1440px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex items-start gap-5 p-6 border border-outline-variant" data-reveal>
+                    <span class="material-symbols-outlined text-[40px] text-accent-red shrink-0">verified</span>
+                    <div>
+                        <h4 class="font-headline-md text-headline-md uppercase mb-2" style="font-size:20px">Custom
+                            Manufacturing</h4>
+                        <p class="font-body-md text-neutral-gray">Custom designs based on your logo, colors, and
+                            specifications.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 p-6 border border-outline-variant" data-reveal>
+                    <span class="material-symbols-outlined text-[40px] text-accent-red shrink-0">design_services</span>
+                    <div>
+                        <h4 class="font-headline-md text-headline-md uppercase mb-2" style="font-size:20px">Private
+                            Label &amp; Bulk</h4>
+                        <p class="font-body-md text-neutral-gray">Full private label branding. Bulk boxing gloves and
+                            MMA gear available.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-5 p-6 border border-outline-variant" data-reveal>
+                    <span
+                        class="material-symbols-outlined text-[40px] text-accent-red shrink-0">workspace_premium</span>
+                    <div>
+                        <h4 class="font-headline-md text-headline-md uppercase mb-2" style="font-size:20px">Premium
+                            Materials</h4>
+                        <p class="font-body-md text-neutral-gray">PU Flex and genuine leather. Worldwide shipping on
+                            every order.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="js/main.js"></script>
+    <script src="js/products-engine.js"></script>
+    <script src="js/inquiry.js"></script>
+    <noscript>
+        <style>
+            body::before {
+                content: 'This site requires JavaScript to load products and navigation. Please enable JavaScript.';
+                display: block;
+                text-align: center;
+                padding: 40px;
+                font-family: sans-serif;
+                font-size: 16px;
+                background: #fff;
+            }
+        </style>
+    </noscript>
+    <script>
+        // injectNavbar/injectFooter are safe to call here — script is at end of body,
+        // so all placeholder divs already exist in DOM.
+        injectNavbar('home');
+        injectFooter();
+
+        const FALLBACK_IMG = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPwYyVXNVUQWL7f7HrH8fiEfgYPYI_tfyM3CaGpEFhfwhk_x0K5dg-_QQDjiMhuVYoUfD4xI0tuJWivfgSpBkhaYTU5pueNvFmUb7g7u_zRP01qJ4eA_Q6k8oaBeTd5I5jXTwY32mq2cCSKAyCz-DR3vp4vWKbs5ndkd5ZRyADEwpYMbelrVDLTI_oUSNy8Eb2WqefJ4KjTt2PTx0a8rhSaNhiUTa9eFhFhgWIejCbcsPWbuQHm0vQ_O2sqpp_4EsGEt3U8960wbg';
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            // ── FEATURED GEAR ─────────────────────────────────────
+            const grid = document.getElementById('featured-grid');
+            if (grid) {
+                try {
+                    const products = await loadSampleProducts();
+                    if (!products || products.length === 0) throw new Error('no products');
+
+                    // Fisher-Yates shuffle, take first 4
+                    const shuffled = [...products];
+                    for (let i = shuffled.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                    }
+                    const featured = shuffled.slice(0, 4);
+
+                    // Build all HTML first, then inject once (single DOM write)
+                    const html = featured.map(p => {
+                        const img = _resolveImage(p, 0);
+                        const name = HFG_esc ? HFG_esc(p.name) : p.name;
+                        const catName = HFG_esc ? HFG_esc(p.categoryName) : p.categoryName;
+                        return `<a href="pages/product.html?id=${encodeURIComponent(p.id)}" class="group border border-outline-variant bg-surface-container-lowest overflow-hidden flex flex-col" data-reveal style="text-decoration:none;color:inherit">
+                    <div style="width:100%;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;aspect-ratio:1/1;border-bottom:1px solid #eee">
+                        <img src="${img}" alt="${name}" loading="lazy"
+                            class="transition-transform duration-500 group-hover:scale-105"
+                            style="display:block;width:100%;height:auto;object-fit:contain;padding:8px"
+                            onerror="this.onerror=null;this.src='${FALLBACK_IMG}'"/>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow">
+                        <h3 class="font-headline-md text-headline-md uppercase mb-1 leading-tight" style="font-size:17px">${name}</h3>
+                        <p class="font-body-md text-neutral-gray mb-4" style="font-size:12px;font-weight:400;letter-spacing:0.04em">${catName}</p>
+                        <div class="mt-auto">
+                            <span class="w-full bg-accent-red text-on-primary py-3 font-label-bold uppercase flex items-center justify-center gap-2 text-center text-sm" style="pointer-events:none">
+                                <span class="material-symbols-outlined text-[16px]">send</span> Send Inquiry
+                            </span>
+                        </div>
+                    </div>
+                </a>`;
+                    }).join('');
+                    grid.innerHTML = html;
+                } catch (err) {
+                    console.error('[index] featured-grid error:', err.message);
+                    grid.innerHTML = '<div class="col-span-4 text-center py-10 opacity-40 font-label-bold uppercase">No products found</div>';
+                }
+                if (typeof initScrollReveal === 'function') initScrollReveal();
+            }
+
+            // ── WHAT WE MAKE ──────────────────────────────────────
+            const wwmGrid = document.getElementById('what-we-make-grid');
+            if (wwmGrid) {
+                try {
+                    const allProducts = await loadProducts();
+                    if (!allProducts || !allProducts.length) throw new Error('no products');
+
+                    // Group by category, pick one random product per category
+                    const categoryMap = {};
+                    allProducts.forEach(p => {
+                        const cat = p.categoryId || 'other';
+                        if (!categoryMap[cat]) categoryMap[cat] = { name: p.categoryName || cat, id: cat, items: [] };
+                        categoryMap[cat].items.push(p);
+                    });
+
+                    const categories = Object.values(categoryMap).sort(() => 0.5 - Math.random());
+                    const selected = categories.slice(0, 3).map(cat => {
+                        const s = [...cat.items].sort(() => 0.5 - Math.random());
+                        return { category: cat, product: s[0] };
+                    });
+                    if (!selected.length) throw new Error('empty');
+
+                    // Single DOM write
+                    wwmGrid.innerHTML = selected.map(({ category, product }) => {
+                        const img = _resolveImage(product, 0);
+                        const link = 'products.html?cat=' + encodeURIComponent(category.id);
+                        const desc = (product.description || '').substring(0, 60);
+                        const descText = desc.length === 60 ? desc + '...' : desc;
+                        return `<a href="${link}" class="group relative aspect-[3/4] overflow-hidden bg-surface-container block" data-reveal>
+                            <img src="${img}" alt="${HFG_esc ? HFG_esc(product.name) : product.name}" loading="lazy"
+                                class="w-full h-full object-cover"
+                                onerror="this.onerror=null;this.src='${FALLBACK_IMG}'" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="font-headline-md text-headline-md text-on-primary uppercase mb-1">${HFG_esc ? HFG_esc(category.name) : category.name}</h3>
+                                <p class="font-body-md text-on-primary opacity-70 mb-3" style="font-size:14px">${HFG_esc ? HFG_esc(descText) : descText}</p>
+                                <p class="font-label-bold text-accent-red uppercase">View Products &rarr;</p>
+                            </div>
+                        </a>`;
+                    }).join('');
+                    if (typeof initScrollReveal === 'function') initScrollReveal();
+
+                } catch (e) {
+                    console.error('[index] what-we-make error:', e.message);
+                    // Static fallback cards
+                    wwmGrid.innerHTML = `
+                        <a href="products.html?cat=boxing" class="group relative aspect-[3/4] overflow-hidden bg-surface-container block" data-reveal>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPwYyVXNVUQWL7f7HrH8fiEfgYPYI_tfyM3CaGpEFhfwhk_x0K5dg-_QQDjiMhuVYoUfD4xI0tuJWivfgSpBkhaYTU5pueNvFmUb7g7u_zRP01qJ4eA_Q6k8oaBeTd5I5jXTwY32mq2cCSKAyCz-DR3vp4vWKbs5ndkd5ZRyADEwpYMbelrVDLTI_oUSNy8Eb2WqefJ4KjTt2PTx0a8rhSaNhiUTa9eFhFhgWIejCbcsPWbuQHm0vQ_O2sqpp_4EsGEt3U8960wbg" alt="Boxing Gloves" loading="lazy" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="font-headline-md text-headline-md text-on-primary uppercase mb-1">Boxing</h3>
+                                <p class="font-body-md text-on-primary opacity-70 mb-3" style="font-size:14px">Custom boxing gloves in PU Flex or genuine leather.</p>
+                                <p class="font-label-bold text-accent-red uppercase">View Products &rarr;</p>
+                            </div>
+                        </a>
+                        <a href="products.html?cat=mma" class="group relative aspect-[3/4] overflow-hidden bg-surface-container block" data-reveal>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_fN-RXqNXva_CKbzGCUQ9HOIrx86kwf_bd3RvU0_96bssY-gr_HU4mw6Pa7Q_BobZU7j2CKCtjeA1_74ZaZZdV0SdVgVzqQ_Hwyi6IqqSlU-NK4V1E0I5w-uCww0sELypaycj25JgsK8XI8ckFdmYwPb-JfFfaouZR_7B-ETaMHdufEWAhA6u17Q4D_ufzGCGyfacg_mkhB9k9aYr1rCsZyNBxuaMFKS35KnzinGcuIltDsMbV77oTsSL_f--syON4G6uQ40tMPg" alt="MMA" loading="lazy" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="font-headline-md text-headline-md text-on-primary uppercase mb-1">MMA</h3>
+                                <p class="font-body-md text-on-primary opacity-70 mb-3" style="font-size:14px">Flexible MMA gloves designed for grappling and striking.</p>
+                                <p class="font-label-bold text-accent-red uppercase">View Products &rarr;</p>
+                            </div>
+                        </a>
+                        <a href="products.html?cat=gym-fitness" class="group relative aspect-[3/4] overflow-hidden bg-surface-container block" data-reveal>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPKKPWBh-3wwwEYO_NZzH9IA9YT4D6bsOq-nNhplVm87QGijs1V2xqMS62magPOt7HwP58zzVjYTp-Lo6WawV_ZfBXmKmmQQXPq4fmU_Zh3MivCTtF9Y22pZKMPVeNjM7anTzyi3kJkbIdlpi3VumMFtR9VJQTZzczhaXwLeD2w1OZYiA9piYROLFW7zxPy5sVgUcKHbadamcRMhRYBmSmgP3lila5Pq0q-VLUIpvl_f-zgV1o3nw_WpO2UkkkvS_VtyPw5ZtD4tk" alt="Training" loading="lazy" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="font-headline-md text-headline-md text-on-primary uppercase mb-1">Gym &amp; Fitness</h3>
+                                <p class="font-body-md text-on-primary opacity-70 mb-3" style="font-size:14px">Hand wraps, mitts, and essential training accessories.</p>
+                                <p class="font-label-bold text-accent-red uppercase">View Products &rarr;</p>
+                            </div>
+                        </a>`;
+                }
+            }
+        });
+    </script>
+    <script src="js/animations.js"></script>
+    <script src="js/home-animations.js"></script>
+    <!-- COOKIE POPUP — direct child of body, fixed bottom-right -->
+    <section id="hfg-cookie-popup"
+        style="position:fixed;bottom:20px;right:20px;z-index:2147483647;width:480px;max-width:calc(100vw - 40px);background:#fbf9f9;border-top:3px solid #bb0400;box-shadow:0 10px 40px rgba(0,0,0,0.18);padding:28px;font-family:'Hanken Grotesk',sans-serif;">
+        <h2
+            style="font-family:Anton,sans-serif;font-size:24px;text-transform:uppercase;color:#000000;line-height:1;margin:0 0 8px;letter-spacing:0.02em">
+            Cookies &amp; Privacy</h2>
+        <p style="font-size:14px;color:#1b1b1b;margin:0 0 20px;line-height:1.6;opacity:0.85">We use cookies to improve
+            your experience, save your cart, and show relevant products.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+            <button id="hfg-accept" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#ffffff;color:#000000;border:2px solid #000000;padding:11px 28px;flex:1;min-width:130px;transition:background .2s,color .2s"
+                onmouseover="this.style.background='#000000';this.style.color='#ffffff'"
+                onmouseout="this.style.background='#ffffff';this.style.color='#000000'">Accept All</button>
+            <button id="hfg-reject" type="button"
+                style="font-family:Anton,sans-serif;font-size:15px;text-transform:uppercase;letter-spacing:0.05em;cursor:pointer;background:#bb0400;color:#ffffff;border:none;padding:11px 28px;flex:1;min-width:130px;transition:background .2s"
+                onmouseover="this.style.background='#8a0300'"
+                onmouseout="this.style.background='#bb0400'">Reject</button>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var p = document.getElementById('hfg-cookie-popup');
+            if (!p) return;
+            localStorage.removeItem('hfg_cookie_consent');
+            if (localStorage.getItem('cookieConsent') === 'accepted' || localStorage.getItem('cookieConsent') === 'rejected') { p.style.display = 'none'; return; }
+            p.style.display = ''; p.style.opacity = '1'; p.style.transform = 'none';
+            function dismiss(v) {
+                localStorage.setItem('cookieConsent', v);
+                p.style.transition = 'opacity .25s, transform .25s';
+                p.style.opacity = '0';
+                p.style.transform = 'translateY(10px)';
+                setTimeout(function () { p.style.display = 'none'; }, 260);
+            }
+            document.getElementById('hfg-accept').onclick = function () { dismiss('accepted'); };
+            document.getElementById('hfg-reject').onclick = function () { dismiss('rejected'); };
+        })();
+    </script>
+</body>
+
+</html>
